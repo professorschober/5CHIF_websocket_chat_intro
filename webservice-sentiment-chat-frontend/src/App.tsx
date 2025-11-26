@@ -1,19 +1,12 @@
 import { AppBar, Toolbar, Typography } from "@mui/material";
 import { Wifi } from "@mui/icons-material";
+import Header from "./components/header.tsx";
 
 function App() {
     return (
         <>
-            <AppBar position="static">
-                <Toolbar>
-                    <Wifi sx={{ mr: 1 }} />
-                    <Typography variant="h6" component="div">
-                        WebSockets – Client
-                    </Typography>
-                </Toolbar>
-            </AppBar>
-        </>
-    );
+            <Header></Header>
+        </>);
 }
 
 export default App;
