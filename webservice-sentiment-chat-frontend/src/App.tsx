@@ -1,16 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { AppBar, Toolbar, Typography } from "@mui/material";
+import { Wifi } from "@mui/icons-material";
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-     
-    </>
-  )
+    return (
+        <>
+            <AppBar position="static">
+                <Toolbar>
+                    <Wifi sx={{ mr: 1 }} />
+                    <Typography variant="h6" component="div">
+                        WebSockets – Client
+                    </Typography>
+                </Toolbar>
+            </AppBar>
+        </>
+    );
 }
 
-export default App
+export default App;
