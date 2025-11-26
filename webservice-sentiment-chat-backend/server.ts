@@ -6,13 +6,15 @@ interface ClientWebSocket extends WebSocket {
     clientId: string;
 }
 
-const port: number = process.env.PORT ? Number(process.env.PORT) : 3002;
+const port: number = process.env.PORT ? Number(process.env.PORT) : 3005;
 
 const server = http.createServer(app);
 
 server.listen(port, () => {
     console.log(`HTTP- und WebSocket-Server läuft auf Port ${port}`);
 });
+
+
 
 const wss = new WebSocketServer({ server });
 

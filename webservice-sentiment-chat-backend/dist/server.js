@@ -1,7 +1,7 @@
 import http from "http";
 import app from "./app.js";
 import { WebSocketServer } from "ws";
-const port = process.env.PORT ? Number(process.env.PORT) : 3002;
+const port = process.env.PORT ? Number(process.env.PORT) : 3005;
 const server = http.createServer(app);
 server.listen(port, () => {
     console.log(`HTTP- und WebSocket-Server läuft auf Port ${port}`);
