@@ -8,6 +8,13 @@ server.listen(port, () => {
 });
 const wss = new WebSocketServer({ server });
 let nextId = 1;
+wss.on("close", () => {
+    console.log("connection closed");
+});
+wss.on("error", (err) => {
+    console.log("error");
+    console.log(err.message);
+});
 wss.on("connection", (socket) => {
     socket.clientId = `c${nextId++}`;
     console.log("connection established to", socket.clientId);
@@ -18,9 +25,26 @@ wss.on("connection", (socket) => {
     console.log("message", JSON.stringify(welcomeMsg));
     socket.send(JSON.stringify(welcomeMsg));
     socket.on("message", (data) => {
-        console.log("message received");
+        console.log("message received", data);
         const text = String(data);
-        const servertext = text + " from Server";
-        socket.send(JSON.stringify(servertext));
+        const clientId = socket.clientId;
+        let msg = JSON.parse(String(data));
+        console.log("message received", msg);
+        const payload = {
+            type: "message",
+            from: clientId,
+            text: msg.text
+        };
+        try {
+            const json = JSON.stringify(payload);
+            socket.send(json);
+        }
+        catch {
+            console.warn("Kein gültiges JSON, sende als Text zurück.");
+        }
+    });
+    socket.on("close", () => {
+        const id = socket.clientId;
+        console.log("disconnected:", id);
     });
 });
